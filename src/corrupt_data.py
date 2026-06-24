@@ -131,6 +131,57 @@ def inject_outliers(data, outlier_prob=0.05):
         
     return corrupted_data, ground_truth_log
 
+def inject_duplicates(data, duplicate_prob=0.05):
+    """
+    Simulates a patient being entered into the system twice under two different IDs.
+    We keep their demographics identical but slightly tweak a clinical field.
+    This creates a realistic "Entity Resolution" challenge for our future algorithm.
+    """
+    corrupted_data = list(data) # Make a copy of the list
+    ground_truth_log = []
+    
+    # Find the highest existing Patient ID so we can assign new ones
+    current_max_id = max([int(row['Patient ID']) for row in data if str(row['Patient ID']).isdigit()])
+    next_new_id = current_max_id + 1
+    
+    new_duplicates = []
+    
+    for i, row in enumerate(data):
+        if random.random() < duplicate_prob:
+            dup_row = row.copy()
+            
+            # 1. Give them a brand new Patient ID (so it's not a trivial exact-match deduplication)
+            dup_row['Patient ID'] = str(next_new_id)
+            
+            # 2. Tweak a value slightly to simulate a typo during the second entry
+            if dup_row['Symptom Severity (1-10)'].isdigit():
+                val = int(dup_row['Symptom Severity (1-10)'])
+                # Shift by +1 or -1, keeping it within bounds 1-10
+                new_val = max(1, min(10, val + random.choice([-1, 1])))
+                dup_row['Symptom Severity (1-10)'] = str(new_val)
+                
+            new_duplicates.append(dup_row)
+            
+            # 3. Log the truth: "This new ID is actually a clone of the old ID"
+            ground_truth_log.append({
+                'row_index': 'unknown_due_to_shuffle',
+                'patient_id': str(next_new_id),
+                'column': 'Entire Row',
+                'original_value': str(row['Patient ID']), # The ID it was cloned from
+                'corruption_type': 'duplicate',
+                'corrupted_value': 'N/A'
+            })
+            
+            next_new_id += 1
+            
+    # Add the duplicates to our dataset
+    corrupted_data.extend(new_duplicates)
+    
+    # Shuffle the dataset so the duplicates are hidden randomly throughout the file!
+    random.shuffle(corrupted_data)
+    
+    return corrupted_data, ground_truth_log
+
 def main():
     random.seed(42) # For reproducibility while we build
     
@@ -157,10 +208,14 @@ def main():
     print("Injecting outliers...")
     messy_data, outlier_log = inject_outliers(messy_data, outlier_prob=0.05)
     
-    # Combine all answer keys
-    truth_log = missing_log + mislabel_log + outlier_log
+    # 5. Inject duplicate rows
+    print("Injecting duplicate rows...")
+    messy_data, duplicate_log = inject_duplicates(messy_data, duplicate_prob=0.05)
     
-    # 5. Save the messy dataset
+    # Combine all answer keys
+    truth_log = missing_log + mislabel_log + outlier_log + duplicate_log
+    
+    # 6. Save the messy dataset
     print("Saving messy_data.csv...")
     with open(messy_data_path, mode='w', encoding='utf-8', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -172,7 +227,7 @@ def main():
     with open(ground_truth_path, mode='w', encoding='utf-8') as f:
         json.dump(truth_log, f, indent=4)
         
-    print(f"Done! Created messy_data.csv. Logged {len(missing_log)} missing values, {len(mislabel_log)} mislabels, and {len(outlier_log)} outliers.")
+    print(f"Done! Created messy_data.csv. Logged {len(missing_log)} missing values, {len(mislabel_log)} mislabels, {len(outlier_log)} outliers, and {len(duplicate_log)} duplicates.")
 
 if __name__ == "__main__":
     main()

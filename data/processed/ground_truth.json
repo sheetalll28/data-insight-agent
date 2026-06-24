@@ -1164,5 +1164,181 @@
         "original_value": "87",
         "corruption_type": "outlier",
         "corrupted_value": "-50"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "501",
+        "column": "Entire Row",
+        "original_value": "10",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "502",
+        "column": "Entire Row",
+        "original_value": "18",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "503",
+        "column": "Entire Row",
+        "original_value": "72",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "504",
+        "column": "Entire Row",
+        "original_value": "96",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "505",
+        "column": "Entire Row",
+        "original_value": "102",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "506",
+        "column": "Entire Row",
+        "original_value": "122",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "507",
+        "column": "Entire Row",
+        "original_value": "158",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "508",
+        "column": "Entire Row",
+        "original_value": "176",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "509",
+        "column": "Entire Row",
+        "original_value": "197",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "510",
+        "column": "Entire Row",
+        "original_value": "198",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "511",
+        "column": "Entire Row",
+        "original_value": "208",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "512",
+        "column": "Entire Row",
+        "original_value": "242",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "513",
+        "column": "Entire Row",
+        "original_value": "284",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "514",
+        "column": "Entire Row",
+        "original_value": "313",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "515",
+        "column": "Entire Row",
+        "original_value": "345",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "516",
+        "column": "Entire Row",
+        "original_value": "351",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "517",
+        "column": "Entire Row",
+        "original_value": "372",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "518",
+        "column": "Entire Row",
+        "original_value": "425",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "519",
+        "column": "Entire Row",
+        "original_value": "438",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "520",
+        "column": "Entire Row",
+        "original_value": "441",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "521",
+        "column": "Entire Row",
+        "original_value": "463",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
+    },
+    {
+        "row_index": "unknown_due_to_shuffle",
+        "patient_id": "522",
+        "column": "Entire Row",
+        "original_value": "500",
+        "corruption_type": "duplicate",
+        "corrupted_value": "N/A"
     }
 ]
