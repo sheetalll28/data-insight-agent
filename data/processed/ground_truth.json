@@ -460,5 +460,709 @@
         "column": "Sleep Quality (1-10)",
         "original_value": "6",
         "corruption_type": "missing"
+    },
+    {
+        "row_index": 2,
+        "patient_id": "3",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Depression"
+    },
+    {
+        "row_index": 5,
+        "patient_id": "6",
+        "column": "Gender",
+        "original_value": "Male",
+        "corruption_type": "mislabel",
+        "corrupted_value": "male"
+    },
+    {
+        "row_index": 54,
+        "patient_id": "55",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "woman"
+    },
+    {
+        "row_index": 77,
+        "patient_id": "78",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Femle"
+    },
+    {
+        "row_index": 95,
+        "patient_id": "96",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Depression"
+    },
+    {
+        "row_index": 140,
+        "patient_id": "141",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "F"
+    },
+    {
+        "row_index": 165,
+        "patient_id": "166",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "F"
+    },
+    {
+        "row_index": 180,
+        "patient_id": "181",
+        "column": "Gender",
+        "original_value": "Male",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Mle"
+    },
+    {
+        "row_index": 183,
+        "patient_id": "184",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "woman"
+    },
+    {
+        "row_index": 211,
+        "patient_id": "212",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "MDD"
+    },
+    {
+        "row_index": 232,
+        "patient_id": "233",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Femle"
+    },
+    {
+        "row_index": 237,
+        "patient_id": "238",
+        "column": "Diagnosis",
+        "original_value": "Bipolar Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "BD"
+    },
+    {
+        "row_index": 296,
+        "patient_id": "297",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "F"
+    },
+    {
+        "row_index": 300,
+        "patient_id": "301",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Femle"
+    },
+    {
+        "row_index": 303,
+        "patient_id": "304",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Major Depression"
+    },
+    {
+        "row_index": 304,
+        "patient_id": "305",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Major Depression"
+    },
+    {
+        "row_index": 306,
+        "patient_id": "307",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Femle"
+    },
+    {
+        "row_index": 318,
+        "patient_id": "319",
+        "column": "Diagnosis",
+        "original_value": "Bipolar Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Bipolar"
+    },
+    {
+        "row_index": 329,
+        "patient_id": "330",
+        "column": "Gender",
+        "original_value": "Male",
+        "corruption_type": "mislabel",
+        "corrupted_value": "male"
+    },
+    {
+        "row_index": 342,
+        "patient_id": "343",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "woman"
+    },
+    {
+        "row_index": 359,
+        "patient_id": "360",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Femle"
+    },
+    {
+        "row_index": 402,
+        "patient_id": "403",
+        "column": "Diagnosis",
+        "original_value": "Bipolar Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Bipolar Dis."
+    },
+    {
+        "row_index": 428,
+        "patient_id": "429",
+        "column": "Gender",
+        "original_value": "Female",
+        "corruption_type": "mislabel",
+        "corrupted_value": "female"
+    },
+    {
+        "row_index": 470,
+        "patient_id": "471",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "MDD"
+    },
+    {
+        "row_index": 497,
+        "patient_id": "498",
+        "column": "Diagnosis",
+        "original_value": "Major Depressive Disorder",
+        "corruption_type": "mislabel",
+        "corrupted_value": "Major Depression"
+    },
+    {
+        "row_index": 8,
+        "patient_id": "9",
+        "column": "Age",
+        "original_value": "21",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 8,
+        "patient_id": "9",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "67",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 9,
+        "patient_id": "10",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "89",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 19,
+        "patient_id": "20",
+        "column": "Age",
+        "original_value": "37",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 21,
+        "patient_id": "22",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "65",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 30,
+        "patient_id": "31",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "74",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 42,
+        "patient_id": "43",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "73",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 50,
+        "patient_id": "51",
+        "column": "Age",
+        "original_value": "40",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 55,
+        "patient_id": "56",
+        "column": "Age",
+        "original_value": "29",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 55,
+        "patient_id": "56",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "68",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 56,
+        "patient_id": "57",
+        "column": "Age",
+        "original_value": "43",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 72,
+        "patient_id": "73",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "83",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 79,
+        "patient_id": "80",
+        "column": "Age",
+        "original_value": "29",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 87,
+        "patient_id": "88",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "64",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 102,
+        "patient_id": "103",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "83",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 110,
+        "patient_id": "111",
+        "column": "Age",
+        "original_value": "41",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 111,
+        "patient_id": "112",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "76",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 112,
+        "patient_id": "113",
+        "column": "Age",
+        "original_value": "37",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 138,
+        "patient_id": "139",
+        "column": "Age",
+        "original_value": "57",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 140,
+        "patient_id": "141",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "79",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 142,
+        "patient_id": "143",
+        "column": "Age",
+        "original_value": "50",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 170,
+        "patient_id": "171",
+        "column": "Age",
+        "original_value": "24",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 189,
+        "patient_id": "190",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "65",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 194,
+        "patient_id": "195",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "73",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 196,
+        "patient_id": "197",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "70",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 200,
+        "patient_id": "201",
+        "column": "Age",
+        "original_value": "24",
+        "corruption_type": "outlier",
+        "corrupted_value": "0"
+    },
+    {
+        "row_index": 216,
+        "patient_id": "217",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "63",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 225,
+        "patient_id": "226",
+        "column": "Age",
+        "original_value": "21",
+        "corruption_type": "outlier",
+        "corrupted_value": "0"
+    },
+    {
+        "row_index": 227,
+        "patient_id": "228",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "77",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 235,
+        "patient_id": "236",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "77",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 242,
+        "patient_id": "243",
+        "column": "Age",
+        "original_value": "18",
+        "corruption_type": "outlier",
+        "corrupted_value": "0"
+    },
+    {
+        "row_index": 250,
+        "patient_id": "251",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "84",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 253,
+        "patient_id": "254",
+        "column": "Age",
+        "original_value": "38",
+        "corruption_type": "outlier",
+        "corrupted_value": "0"
+    },
+    {
+        "row_index": 260,
+        "patient_id": "261",
+        "column": "Age",
+        "original_value": "20",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 296,
+        "patient_id": "297",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "86",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 300,
+        "patient_id": "301",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "81",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 302,
+        "patient_id": "303",
+        "column": "Age",
+        "original_value": "32",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 318,
+        "patient_id": "319",
+        "column": "Age",
+        "original_value": "45",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 322,
+        "patient_id": "323",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "60",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 328,
+        "patient_id": "329",
+        "column": "Age",
+        "original_value": "43",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 332,
+        "patient_id": "333",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "74",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 333,
+        "patient_id": "334",
+        "column": "Age",
+        "original_value": "55",
+        "corruption_type": "outlier",
+        "corrupted_value": "0"
+    },
+    {
+        "row_index": 334,
+        "patient_id": "335",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "76",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 341,
+        "patient_id": "342",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "75",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 354,
+        "patient_id": "355",
+        "column": "Age",
+        "original_value": "27",
+        "corruption_type": "outlier",
+        "corrupted_value": "999"
+    },
+    {
+        "row_index": 356,
+        "patient_id": "357",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "85",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 391,
+        "patient_id": "392",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "61",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 393,
+        "patient_id": "394",
+        "column": "Age",
+        "original_value": "46",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 394,
+        "patient_id": "395",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "77",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 411,
+        "patient_id": "412",
+        "column": "Age",
+        "original_value": "31",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 413,
+        "patient_id": "414",
+        "column": "Age",
+        "original_value": "20",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 414,
+        "patient_id": "415",
+        "column": "Age",
+        "original_value": "33",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 427,
+        "patient_id": "428",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "82",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 430,
+        "patient_id": "431",
+        "column": "Age",
+        "original_value": "20",
+        "corruption_type": "outlier",
+        "corrupted_value": "-15"
+    },
+    {
+        "row_index": 438,
+        "patient_id": "439",
+        "column": "Age",
+        "original_value": "48",
+        "corruption_type": "outlier",
+        "corrupted_value": "150"
+    },
+    {
+        "row_index": 441,
+        "patient_id": "442",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "86",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 456,
+        "patient_id": "457",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "63",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 461,
+        "patient_id": "462",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "83",
+        "corruption_type": "outlier",
+        "corrupted_value": "9999"
+    },
+    {
+        "row_index": 471,
+        "patient_id": "472",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "65",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 482,
+        "patient_id": "483",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "90",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 484,
+        "patient_id": "485",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "72",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
+    },
+    {
+        "row_index": 494,
+        "patient_id": "495",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "70",
+        "corruption_type": "outlier",
+        "corrupted_value": "200"
+    },
+    {
+        "row_index": 497,
+        "patient_id": "498",
+        "column": "Adherence to Treatment (%)",
+        "original_value": "87",
+        "corruption_type": "outlier",
+        "corrupted_value": "-50"
     }
 ]
