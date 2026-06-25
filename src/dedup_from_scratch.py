@@ -1,6 +1,7 @@
 import csv
 import sys
 import os
+import json
 
 # Ensure we can import our Levenshtein script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -68,46 +69,101 @@ def calculate_similarity(row1, row2):
     score = 0.0
     weights_total = 0.0
     
-    # 1. Exact Match for Demographics (Heavy Weight)
+    # 1. Demographics (Medium Weight)
     if row1['Gender'] != '' and row2['Gender'] != '':
-        weight = 3.0
-        weights_total += weight
-        if row1['Gender'] == row2['Gender']:
-            score += weight
+        weights_total += 2.0
+        if row1['Gender'] == row2['Gender']: score += 2.0
             
     if row1['Age'] != '' and row2['Age'] != '':
-        weight = 3.0
-        weights_total += weight
-        if row1['Age'] == row2['Age']:
-            score += weight
+        weights_total += 2.0
+        if row1['Age'] == row2['Age']: score += 2.0
+        
+    # 2. Temporal Anchor (MASSIVE Weight)
+    # If two people have the exact same demographics AND started treatment on the exact same day,
+    # it's incredibly likely they are our duplicate rows.
+    if row1['Treatment Start Date'] != '' and row2['Treatment Start Date'] != '':
+        weights_total += 6.0
+        if row1['Treatment Start Date'] == row2['Treatment Start Date']: score += 6.0
             
-    # 2. Fuzzy Match for Text Fields using our Levenshtein Math (Medium Weight)
-    text_fields = ['Diagnosis', 'Therapy Type', 'Medication']
+    # 3. Fuzzy Match for all Text Fields using Levenshtein (Standard Weight)
+    text_fields = ['Diagnosis', 'Therapy Type', 'Medication', 'Outcome', 'AI-Detected Emotional State']
     for field in text_fields:
         if row1[field] != '' and row2[field] != '':
-            weight = 2.0
-            weights_total += weight
-            # Here we use our from-scratch Levenshtein distance!
+            weights_total += 1.0
             sim = string_similarity(row1[field], row2[field])
-            score += (sim * weight)
+            score += sim
             
-    # 3. Numeric Proximity for Clinical Scores (Low Weight)
-    numeric_fields = ['Symptom Severity (1-10)', 'Stress Level (1-10)']
+    # 4. Numeric Proximity for all Clinical Scores (Low Weight)
+    numeric_fields = ['Symptom Severity (1-10)', 'Stress Level (1-10)', 'Mood Score (1-10)', 
+                      'Sleep Quality (1-10)', 'Physical Activity (hrs/week)', 
+                      'Treatment Duration (weeks)', 'Treatment Progress (1-10)', 'Adherence to Treatment (%)']
     for field in numeric_fields:
-        # Check if they are valid numbers (ignoring missing or weird outliers)
         if row1[field].lstrip('-').isdigit() and row2[field].lstrip('-').isdigit():
-            weight = 1.0
-            weights_total += weight
+            weights_total += 0.5
             v1, v2 = int(row1[field]), int(row2[field])
             diff = abs(v1 - v2)
-            # Convert difference into a similarity (0 diff = 1.0 sim)
-            sim = max(0.0, 1.0 - (diff / 10.0))
-            score += (sim * weight)
+            
+            # Decay the similarity based on how far apart the numbers are
+            if field == 'Adherence to Treatment (%)':
+                sim = max(0.0, 1.0 - (diff / 20.0)) # 20% diff = 0 sim
+            else:
+                sim = max(0.0, 1.0 - (diff / 5.0))  # 5 point diff = 0 sim
+                
+            score += (sim * 0.5)
             
     if weights_total == 0:
         return 0.0
         
     return score / weights_total
+
+def evaluate_performance(predicted_clusters, truth_log_path):
+    """
+    Calculates Precision, Recall, and F1-Score entirely from scratch.
+    """
+    # 1. Extract the True Pairs from our answer key
+    with open(truth_log_path, 'r', encoding='utf-8') as f:
+        truth_log = json.load(f)
+        
+    true_pairs = set()
+    for entry in truth_log:
+        if entry['corruption_type'] == 'duplicate':
+            # We sort them so (Patient A, Patient B) is treated identically to (Patient B, Patient A)
+            pair = tuple(sorted([str(entry['patient_id']), str(entry['original_value'])]))
+            true_pairs.add(pair)
+            
+    # 2. Extract the Predicted Pairs from our clusters
+    predicted_pairs = set()
+    for cluster in predicted_clusters:
+        cluster_list = list(cluster)
+        # Generate all pairwise combinations within the cluster
+        for i in range(len(cluster_list)):
+            for j in range(i + 1, len(cluster_list)):
+                pair = tuple(sorted([str(cluster_list[i]), str(cluster_list[j])]))
+                predicted_pairs.add(pair)
+                
+    # 3. Calculate True Positives, False Positives, False Negatives
+    true_positives = len(predicted_pairs.intersection(true_pairs))
+    false_positives = len(predicted_pairs - true_pairs)
+    false_negatives = len(true_pairs - predicted_pairs)
+    
+    # 4. Calculate Precision, Recall, F1
+    precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0.0
+    recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0.0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    
+    print("\n" + "="*40)
+    print("--- ML PERFORMANCE EVALUATION ---")
+    print("="*40)
+    print(f"True Duplicates Hidden in Data : {len(true_pairs)}")
+    print(f"Total Pairs Guessed by Agent   : {len(predicted_pairs)}")
+    print(f"Correct Guesses (True Positive): {true_positives}")
+    print(f"Wrong Guesses (False Positive) : {false_positives}")
+    print(f"Missed Duplicates (False Neg.) : {false_negatives}")
+    print("-" * 40)
+    print(f"Precision : {precision:.3f} (When the Agent guesses, how often is it right?)")
+    print(f"Recall    : {recall:.3f} (Out of all real duplicates, how many did the Agent find?)")
+    print(f"F1-Score  : {f1:.3f} (Harmonic mean of both)")
+    print("="*40 + "\n")
 
 def main():
     print("Starting Entity Resolution Agent...")
@@ -155,6 +211,10 @@ def main():
     # Print the first few clusters as an example
     for idx, cluster in enumerate(clusters[:5]):
         print(f"Cluster {idx+1}: Patient IDs {cluster}")
+        
+    # 5. Evaluate our Performance
+    truth_path = os.path.join(base_dir, 'data', 'processed', 'ground_truth.json')
+    evaluate_performance(clusters, truth_path)
 
 if __name__ == "__main__":
     main()
