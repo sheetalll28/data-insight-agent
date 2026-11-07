@@ -1,4 +1,4 @@
-# 🧬 Data Insight Agent
+#  Data Insight Agent
 
 An AI-assisted data analysis app built on Streamlit.
 
@@ -189,4 +189,4 @@ These scripts reproduce the project's original experiments on the bundled mental
 - Clustering uses min-max scaling and label-encoded categories, so Euclidean distance on those codes is a rough measure.
 - Very large CSVs are held in memory. Charts are sampled (3,000 to 5,000 points), but the pipeline itself is not chunked.
 
-See `AUDIT.md` for the full project review, the changes made, measured before/after results, and the parts of `update_instructions.md` that are deliberately not implemented yet.
+
