@@ -6,19 +6,23 @@ class NeuralNetwork:
     It uses a ReLU activation for the hidden layer and a Linear activation for the output,
     making it perfectly designed for Regression tasks (predicting continuous numbers like Age).
     """
-    def __init__(self, input_size, hidden_size, output_size, learning_rate=0.01):
+    def __init__(self, input_size, hidden_size, output_size, learning_rate=0.01, seed=42):
         self.lr = learning_rate
         
-        # Initialize weights with small random numbers. 
-        # Using a fixed seed here so we can debug it perfectly later.
-        np.random.seed(42)
+        # Initialize weights with He initialisation (std = sqrt(2 / fan_in)),
+        # the standard choice for ReLU layers. The previous fixed scale of 0.01
+        # left the network badly under-trained after 1000 epochs
+        # (held-out R^2 0.13 vs 0.95 on a synthetic benchmark, see AUDIT.md).
+        # A private, seeded generator keeps runs reproducible without
+        # resetting NumPy's global random state for the rest of the app.
+        rng = np.random.default_rng(seed)
         
         # Layer 1 (Input to Hidden)
-        self.W1 = np.random.randn(input_size, hidden_size) * 0.01
+        self.W1 = rng.standard_normal((input_size, hidden_size)) * np.sqrt(2.0 / input_size)
         self.b1 = np.zeros((1, hidden_size))
         
         # Layer 2 (Hidden to Output)
-        self.W2 = np.random.randn(hidden_size, output_size) * 0.01
+        self.W2 = rng.standard_normal((hidden_size, output_size)) * np.sqrt(2.0 / hidden_size)
         self.b2 = np.zeros((1, output_size))
         
     def relu(self, Z):
@@ -155,13 +159,79 @@ class NeuralNetwork:
             print("\n[SUCCESS] The backpropagation calculus is 100% correct!")
         else:
             print("\n[WARNING] There is a math error in the backward pass.")
+        return diff_W1, diff_W2
+
+    def fit(self, X, Y, epochs=1000):
+        """Full-batch gradient descent for a fixed number of epochs."""
+        for _ in range(epochs):
+            self.forward(X)
+            self.backward(X, Y)
+        return self
+
+    def predict(self, X):
+        return self.forward(X)
+
+
+# ---------------------------------------------------------------------------
+# Honest evaluation helpers (all from scratch, NumPy only)
+# ---------------------------------------------------------------------------
+
+def train_test_split_indices(n, test_size=0.2, seed=42):
+    """Shuffled train/test row indices."""
+    rng = np.random.default_rng(seed)
+    idx = rng.permutation(n)
+    n_test = max(1, int(round(n * test_size)))
+    return idx[n_test:], idx[:n_test]
+
+
+def minmax_fit(X):
+    """Learn min/max on TRAINING data only (prevents test-set leakage)."""
+    return np.min(X, axis=0), np.max(X, axis=0)
+
+
+def minmax_transform(X, mins, maxs):
+    return (X - mins) / (maxs - mins + 1e-8)
+
+
+def r2_score(y_true, y_pred):
+    y_true, y_pred = np.ravel(y_true), np.ravel(y_pred)
+    ss_res = np.sum((y_true - y_pred) ** 2)
+    ss_tot = np.sum((y_true - np.mean(y_true)) ** 2)
+    return 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
+
+
+def mse(y_true, y_pred):
+    return float(np.mean((np.ravel(y_true) - np.ravel(y_pred)) ** 2))
+
+
+def permutation_importance(predict_fn, X, y, n_repeats=10, seed=42):
+    """
+    Model-agnostic feature importance: shuffle one feature at a time on
+    held-out data and measure how much the error (MSE) increases.
+    A feature the model truly relies on hurts accuracy when shuffled;
+    an irrelevant feature does not. Returns (mean_increase, std_increase).
+
+    This replaces mean(|W1|), which is not a reliable importance measure:
+    hidden-layer weights ignore W2, the activations and feature scale.
+    """
+    rng = np.random.default_rng(seed)
+    base = mse(y, predict_fn(X))
+    p = X.shape[1]
+    means, stds = np.zeros(p), np.zeros(p)
+    for j in range(p):
+        deltas = []
+        for _ in range(n_repeats):
+            Xp = X.copy()
+            Xp[:, j] = rng.permutation(Xp[:, j])
+            deltas.append(mse(y, predict_fn(Xp)) - base)
+        means[j], stds[j] = np.mean(deltas), np.std(deltas)
+    return means, stds
 
 def main():
     print("Testing Neural Network math...\n")
     
     # Create some dummy data to test the math (5 patients, 3 features each)
-    np.random.seed(42)
-    X_dummy = np.random.randn(5, 3) 
+    X_dummy = np.random.default_rng(42).standard_normal((5, 3))
     # True target values we want to predict
     Y_dummy = np.array([[25], [40], [35], [55], [20]]) 
     

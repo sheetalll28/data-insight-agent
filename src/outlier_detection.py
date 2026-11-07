@@ -3,12 +3,31 @@ import csv
 import json
 import os
 
-def calculate_iqr_bounds(data_array):
+def _percentile_from_scratch(sorted_data, q):
+    """
+    Linear-interpolated percentile (the same definition NumPy, Pandas and Excel's
+    PERCENTILE.INC use), implemented from scratch on pre-sorted data.
+    The rank of the q-th percentile is h = (n - 1) * q; we interpolate between
+    the two neighbouring order statistics.
+    """
+    n = len(sorted_data)
+    h = (n - 1) * q
+    lo = int(np.floor(h))
+    hi = min(lo + 1, n - 1)
+    return sorted_data[lo] + (h - lo) * (sorted_data[hi] - sorted_data[lo])
+
+def calculate_iqr_bounds(data_array, k=1.5):
     """
     Calculates the Interquartile Range (IQR) entirely from scratch.
     It finds the 25th percentile (Q1) and 75th percentile (Q3), 
     then calculates the safe mathematical boundaries for normal data.
+
+    NaNs are ignored. Quartiles use linear interpolation (previously a
+    truncated index int(n * q) was used, which is biased for small samples).
     """
+    data_array = np.asarray(data_array, dtype=float)
+    data_array = data_array[~np.isnan(data_array)]
+
     # 1. Sort the data from lowest to highest
     sorted_data = np.sort(data_array)
     n = len(sorted_data)
@@ -17,19 +36,16 @@ def calculate_iqr_bounds(data_array):
         return 0, 0
         
     # 2. Find Q1 (25% mark) and Q3 (75% mark)
-    q1_idx = int(n * 0.25)
-    q3_idx = int(n * 0.75)
-    
-    Q1 = sorted_data[q1_idx]
-    Q3 = sorted_data[q3_idx]
+    Q1 = _percentile_from_scratch(sorted_data, 0.25)
+    Q3 = _percentile_from_scratch(sorted_data, 0.75)
     
     # 3. Calculate IQR (The middle 50% of the data)
     IQR = Q3 - Q1
     
     # 4. Calculate Lower and Upper Bounds
     # The 1.5 multiplier is the statistical industry standard created by John Tukey
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
+    lower_bound = Q1 - k * IQR
+    upper_bound = Q3 + k * IQR
     
     return lower_bound, upper_bound
 

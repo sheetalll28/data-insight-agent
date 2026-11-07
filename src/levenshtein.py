@@ -56,8 +56,8 @@ if __name__ == "__main__":
         ("CAT", "COAT", 1),       # 1 Insertion
         ("kitten", "sitting", 3), # 2 Substitutions, 1 Insertion
         ("Depression", "MDD", 10), # Completely different abbreviations
-        ("Major Depression", "Major Depressive Disorder", 13),
-        ("schizophrenia", "Schizo", 7)
+        ("Major Depression", "Major Depressive Disorder", 10), # 1 sub + 9 inserts
+        ("schizophrenia", "Schizo", 8)              # 1 sub (s->S) + 7 deletes
     ]
     
     for s1, s2, expected in test_cases:

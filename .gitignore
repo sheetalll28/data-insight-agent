@@ -35,5 +35,22 @@ venv.bak/
 # MacOS
 .DS_Store
 
-# Secrets
+# Secrets (never commit API keys). .env.example is a blank template and IS committed.
 .env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Test / tool caches
+.pytest_cache/
+
+# Logs and editor folders
+*.log
+.vscode/
+.idea/
+
+# Private working files (not part of the project)
+image.png
+update_instructions.md

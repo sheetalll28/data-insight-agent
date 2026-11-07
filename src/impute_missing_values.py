@@ -24,7 +24,9 @@ def prepare_data(data, target_col):
     numeric_inputs = ['Symptom Severity (1-10)', 'Stress Level (1-10)', 'Mood Score (1-10)']
     
     # 2. Collect all possible categories for One-Hot Encoding
-    genders = list(set([row['Gender'] for row in data if row['Gender'] != '']))
+    # sorted() so the one-hot column order (and therefore the result) is reproducible;
+    # plain set() order changes between runs because Python randomises string hashing.
+    genders = sorted(set([row['Gender'] for row in data if row['Gender'] != '']))
     
     for i, row in enumerate(data):
         # Build the feature vector (the inputs) for this row
@@ -153,8 +155,11 @@ def main():
         
     nn_rmse = calculate_rmse(true_ages, pred_ages)
     
-    # Dumb baseline: just guess the average age of the training set
-    mean_age = np.mean(y_train)
+    # Dumb baseline: just guess the average age of the training set.
+    # It must use the SAME clipped targets the network was trained on;
+    # averaging the raw column (which still holds injected 999s) inflated the
+    # baseline error and made the network look better than it is.
+    mean_age = np.mean(y_train_clipped)
     baseline_preds = np.full_like(true_ages, mean_age)
     baseline_rmse = calculate_rmse(true_ages, baseline_preds)
     
